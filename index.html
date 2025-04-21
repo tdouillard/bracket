@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 NBA Playoff Bracket</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            padding: 20px;
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .share-button {
+            background-color: #fff;
+            color: #333;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .bracket-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+        .round {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 180px;
+            padding: 10px;
+        }
+        .round-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        .matchup {
+            background-color: transparent;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            position: relative;
+            border: 1px solid #2a2a2a;
+        }
+        .team {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            border-bottom: 1px solid #2a2a2a;
+            background-color: #1e1e1e;
+        }
+        .team:last-child {
+            border-bottom: none;
+        }
+        .team-name {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 14px;
+            color: #fff;
+        }
+        .score-input {
+            width: 30px;
+            text-align: center;
+            background-color: transparent;
+            border: 1px solid #444;
+            border-radius: 3px;
+            padding: 2px;
+            color: #fff;
+        }
+        .score-display {
+            width: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .matchup.west .team {
+            border-left: 3px solid #0088cc;
+        }
+        .matchup.east .team {
+            border-left: 3px solid #cc0000;
+        }
+        .matchup.finals .team {
+            border-left: 3px solid #00aa00;
+        }
+        .team.winner {
+            background-color: #333;
+        }
+        .finals-matchup {
+            margin-top: 60px;
+        }
+        .reset-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .reset-button:hover {
+            background-color: #990000;
+        }
+        .champion-container {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+        }
+        .champion-trophy {
+            font-size: 40px;
+            color: gold;
+            margin-bottom: 10px;
+        }
+        .champion-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: gold;
+        }
+        .contest-title {
+            text-align: center;
+            margin: 20px 0 40px;
+        }
+        .contest-title h2 {
+            font-size: 42px;
+            margin: 0;
+            color: #fff;
+        }
+        .contest-title h3 {
+            font-size: 36px;
+            margin: 0;
+            color: #cc0000;
+        }
+        .team-logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .west-conf .team-logo {
+            background-color: #0088cc;
+        }
+        .east-conf .team-logo {
+            background-color: #cc0000;
+        }
+        @media (max-width: 1200px) {
+            .bracket-container {
+                overflow-x: auto;
+                padding-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BRACKET #000004</h1>
+        <button class="share-button">Partager</button>
+    </div>
+    
+    <div class="contest-title">
+        <h2>#TRASHTALK</h2>
+        <h3>BRACKET CONTEST</h3>
+    </div>
+    
+    <div class="bracket-container">
+        <!-- First Round - Western Conference -->
+        <div class="round west-conf" id="west-first-round">
+            <div class="round-title">Round 1</div>
+            <div class="matchup west" id="west-1-8">
+                <div class="team" data-team="Denver Nuggets" data-seed="1" data-conf="west">
+                    <div class="team-logo">DEN</div>
+                    <div class="team-name">Denver</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+                <div class="team" data-team="Sacramento Kings" data-seed="8" data-conf="west">
+                    <div class="team-logo">SAC</div>
+                    <div class="team-name">Sacramento</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+            </div>
+            <div class="matchup west" id="west-4-5">
+                <div class="team" data-team="Phoenix Suns" data-seed="4" data-conf="west">
+                    <div class="team-logo">PHX</div>
+                    <div class="team-name">Phoenix</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+                <div class="team" data-team="Dallas Mavericks" data-seed="5" data-conf="west">
+                    <div class="team-logo">DAL</div>
+                    <div class="team-name">Dallas</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+            </div>
+            <div class="matchup west" id="west-3-6">
+                <div class="team" data-team="Minnesota Timberwolves" data-seed="3" data-conf="west">
+                    <div class="team-logo">MIN</div>
+                    <div class="team-name">Minnesota</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+                <div class="team" data-team="Los Angeles Lakers" data-seed="6" data-conf="west">
+                    <div class="team-logo">LAL</div>
+                    <div class="team-name">LA Lakers</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+            </div>
+            <div class="matchup west" id="west-2-7">
+                <div class="team" data-team="Oklahoma City Thunder" data-seed="2" data-conf="west">
+                    <div class="team-logo">OKC</div>
+                    <div class="team-name">OKC</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+                <div class="team" data-team="Memphis Grizzlies" data-seed="7" data-conf="west">
+                    <div class="team-logo">MEM</div>
+                    <div class="team-name">Memphis</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Second Round - Western Conference -->
+        <div class="round west-conf" id="west-second-round">
+            <div class="round-title">Conf. Semis</div>
+            <div class="matchup west" id="west-semi-1">
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+            </div>
+            <div class="matchup west" id="west-semi-2">
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conference Finals - Western Conference -->
+        <div class="round west-conf" id="west-conf-finals">
+            <div class="round-title">Conf. Finals</div>
+            <div class="matchup west" id="west-final">
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NBA Finals -->
+        <div class="round" id="nba-finals">
+            <div class="round-title">Finals</div>
+            <div class="matchup finals" id="finals">
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+            </div>
+            <div class="champion-container" id="champion-display" style="display: none;">
+                <div class="champion-trophy">🏆</div>
+                <div class="champion-name" id="champion-name">NBA Champion</div>
+            </div>
+        </div>
+        
+        <!-- Conference Finals - Eastern Conference -->
+        <div class="round east-conf" id="east-conf-finals">
+            <div class="round-title">Conf. Finals</div>
+            <div class="matchup east" id="east-final">
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Second Round - Eastern Conference -->
+        <div class="round east-conf" id="east-second-round">
+            <div class="round-title">Conf. Semis</div>
+            <div class="matchup east" id="east-semi-1">
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+            </div>
+            <div class="matchup east" id="east-semi-2">
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+                <div class="team empty">
+                    <div class="team-logo">TBD</div>
+                    <div class="team-name">TBD</div>
+                    <div class="score-display"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- First Round - Eastern Conference -->
+        <div class="round east-conf" id="east-first-round">
+            <div class="round-title">Round 1</div>
+            <div class="matchup east" id="east-1-8">
+                <div class="team" data-team="Boston Celtics" data-seed="1" data-conf="east">
+                    <div class="team-logo">BOS</div>
+                    <div class="team-name">Boston</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+                <div class="team" data-team="Miami Heat" data-seed="8" data-conf="east">
+                    <div class="team-logo">MIA</div>
+                    <div class="team-name">Miami</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+            </div>
+            <div class="matchup east" id="east-4-5">
+                <div class="team" data-team="Cleveland Cavaliers" data-seed="4" data-conf="east">
+                    <div class="team-logo">CLE</div>
+                    <div class="team-name">Cleveland</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+                <div class="team" data-team="Orlando Magic" data-seed="5" data-conf="east">
+                    <div class="team-logo">ORL</div>
+                    <div class="team-name">Orlando</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+            </div>
+            <div class="matchup east" id="east-3-6">
+                <div class="team" data-team="Milwaukee Bucks" data-seed="3" data-conf="east">
+                    <div class="team-logo">MIL</div>
+                    <div class="team-name">Milwaukee</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+                <div class="team" data-team="Indiana Pacers" data-seed="6" data-conf="east">
+                    <div class="team-logo">IND</div>
+                    <div class="team-name">Indiana</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+            </div>
+            <div class="matchup east" id="east-2-7">
+                <div class="team" data-team="New York Knicks" data-seed="2" data-conf="east">
+                    <div class="team-logo">NYK</div>
+                    <div class="team-name">New York</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+                <div class="team" data-team="Philadelphia 76ers" data-seed="7" data-conf="east">
+                    <div class="team-logo">PHI</div>
+                    <div class="team-name">Philadelphia</div>
+                    <input type="number" class="score-input" min="0" max="4">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button class="reset-button" id="reset-bracket">Reset Bracket</button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all score inputs
+            const scoreInputs = document.querySelectorAll('.score-input');
+            
+            // Add event listeners to all score inputs
+            scoreInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    const matchup = this.closest('.matchup');
+                    const inputs = matchup.querySelectorAll('.score-input');
+                    const teams = matchup.querySelectorAll('.team');
+                    
+                    // Validate input
+                    if (this.value < 0) this.value = 0;
+                    if (this.value > 4) this.value = 4;
+                    
+                    // Check if we have a winner
+                    if (inputs[0].value && inputs[1].value) {
+                        const score1 = parseInt(inputs[0].value);
+                        const score2 = parseInt(inputs[1].value);
+                        
+                        if (score1 === 4 || score2 === 4) {
+                            // We have a winner
+                            let winner, loser;
+                            
+                            if (score1 === 4 && score2 < 4) {
+                                winner = teams[0];
+                                loser = teams[1];
+                            } else if (score2 === 4 && score1 < 4) {
+                                winner = teams[1];
+                                loser = teams[0];
+                            } else {
+                                // Invalid state (both teams with 4 wins or neither)
+                                alert("NBA playoff series end when one team reaches 4 wins.");
+                                this.value = "";
+                                return;
+                            }
+                            
+                            // Mark winner
+                            winner.classList.add('winner');
+                            if (loser.classList.contains('winner')) {
+                                loser.classList.remove('winner');
+                            }
+                            
+                            // Advance winner to next round
+                            advanceTeam(matchup.id, winner, score1 === 4 ? score2 : score1);
+                        }
+                    }
+                });
+            });
+            
+            // Reset button
+            document.getElementById('reset-bracket').addEventListener('click', resetBracket);
+            
+            function advanceTeam(matchupId, winner, loserScore) {
+                let nextMatchupId, nextPosition;
+                
+                // Determine next matchup based on current matchup ID
+                if (matchupId === 'west-1-8') {
+                    nextMatchupId = 'west-semi-1';
+                    nextPosition = 0;
+                } else if (matchupId === 'west-4-5') {
+                    nextMatchupId = 'west-semi-1';
+                    nextPosition = 1;
+                } else if (matchupId === 'west-3-6') {
+                    nextMatchupId = 'west-semi-2';
+                    nextPosition = 0;
+                } else if (matchupId === 'west-2-7') {
+                    nextMatchupId = 'west-semi-2';
+                    nextPosition = 1;
+                } else if (matchupId === 'east-1-8') {
+                    nextMatchupId = 'east-semi-1';
+                    nextPosition = 0;
+                } else if (matchupId === 'east-4-5') {
+                    nextMatchupId = 'east-semi-1';
+                    nextPosition = 1;
+                } else if (matchupId === 'east-3-6') {
+                    nextMatchupId = 'east-semi-2';
+                    nextPosition = 0;
+                } else if (matchupId === 'east-2-7') {
+                    nextMatchupId = 'east-semi-2';
+                    nextPosition = 1;
+                } else if (matchupId === 'west-semi-1') {
+                    nextMatchupId = 'west-final';
+                    nextPosition = 0;
+                } else if (matchupId === 'west-semi-2') {
+                    nextMatchupId = 'west-final';
+                    nextPosition = 1;
+                } else if (matchupId === 'east-semi-1') {
+                    nextMatchupId = 'east-final';
+                    nextPosition = 0;
+                } else if (matchupId === 'east-semi-2') {
+                    nextMatchupId = 'east-final';
+                    nextPosition = 1;
+                } else if (matchupId === 'west-final') {
+                    nextMatchupId = 'finals';
+                    nextPosition = 0;
+                } else if (matchupId === 'east-final') {
+                    nextMatchupId = 'finals';
+                    nextPosition = 1;
+                } else if (matchupId === 'finals') {
+                    // We have a champion!
+                    const championName = winner.dataset.team;
+                    document.getElementById('champion-name').textContent = championName + " - 2025 NBA Champions";
+                    document.getElementById('champion-display').style.display = 'block';
+                    return;
+                }
+                
+                // Get the next matchup
+                const nextMatchup = document.getElementById(nextMatchupId);
+                const nextTeams = nextMatchup.querySelectorAll('.team');
+                const nextTeam = nextTeams[nextPosition];
+                
+                // Update the next team with winner's information
+                const teamName = winner.dataset.team;
+                const teamSeed = winner.dataset.seed;
+                const teamConf = winner.dataset.conf;
+                const teamAbbr = winner.querySelector('.team-logo').textContent;
+                
+                nextTeam.dataset.team = teamName;
+                nextTeam.dataset.seed = teamSeed;
+                nextTeam.dataset.conf = teamConf;
+                
+                // Update display
+                nextTeam.querySelector('.team-logo').textContent = teamAbbr;
+                nextTeam.querySelector('.team-name').textContent = teamName.split(' ').pop();
+                
+                // Update score display (converts input to displayed score)
+                const scoreDisplay = nextTeam.querySelector('.score-display');
+                scoreDisplay.textContent = "4";
+                
+                // Remove empty class
+                nextTeam.classList.remove('empty');
+                
+                // Remove winner class if it exists (from previous simulation)
+                if (nextTeam.classList.contains('winner')) {
+                    nextTeam.classList.remove('winner');
+                }
+                
+                // If both teams in next matchup are set, clear any existing scores
+                if (!nextTeams[0].classList.contains('empty') && !nextTeams[1].classList.contains('empty')) {
+                    // Reset score displays
+                    const nextScoreDisplays = nextMatchup.querySelectorAll('.score-display');
+                    nextScoreDisplays.forEach(display => {
+                        display.textContent = '';
+                    });
+                    
+                    // Remove winner class from both teams
+                    nextTeams.forEach(team => {
+                        if (team.classList.contains('winner')) {
+                            team.classList.remove('winner');
+                        }
+                    });
+                }
+            }
+            
+            function resetBracket() {
+                // Reset all scores in first round
+                const firstRoundInputs = document.querySelectorAll('#west-first-round .score-input, #east-first-round .score-input');
+                firstRoundInputs.forEach(input => {
+                    input.value = '';
+                });
+                
+                // Remove winner class from all teams
+                const allTeams = document.querySelectorAll('.team');
+                allTeams.forEach(team => {
+                    if (team.classList.contains('winner')) {
+                        team.classList.remove('winner');
+                    }
+                });
+                
+                // Reset all teams after first round
+                const nonFirstRoundMatchups = [
+                    'west-semi-1', 'west-semi-2', 'west-final',
+                    'east-semi-1', 'east-semi-2', 'east-final',
+                    'finals'
+                ];
+                
+                nonFirstRoundMatchups.forEach(matchupId => {
+                    const matchup = document.getElementById(matchupId);
+                    const teams = matchup.querySelectorAll('.team');
+                    
+                    teams.forEach(team => {
+                        team.classList.add('empty');
+                        team.removeAttribute('data-team');
+                        team.removeAttribute('data-seed');
+                        team.removeAttribute('data-conf');
+                        
+                        team.querySelector('.team-logo').textContent = 'TBD';
+                        team.querySelector('.team-name').textContent = 'TBD';
+                        team.querySelector('.score-display').textContent = '';
+                    });
+                });
+                
+                // Hide champion display
+                document.getElementById('champion-display').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
